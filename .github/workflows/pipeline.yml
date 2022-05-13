@@ -34,3 +34,5 @@ jobs:
           heroku_app_name: calm-plateau-92786
           heroku_email: emma.valtonen@helsinki.fi
           healthcheck: https://calm-plateau-92786.herokuapp.com/health
+          checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
