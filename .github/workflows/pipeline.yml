@@ -32,4 +32,4 @@ jobs:
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: calm-plateau-92786
-          heroku_emal: emma.valtonen@helsinki.fi
+          heroku_email: emma.valtonen@helsinki.fi
