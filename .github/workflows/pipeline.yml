@@ -40,7 +40,7 @@ jobs:
           healthcheck: https://calm-plateau-92786.herokuapp.com/health
           checkstring: ok
           rollbackonhealthcheckfailed: true
-    tag_release:
+  tag_release:
     if: ${{ github.event_name == 'push' }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
