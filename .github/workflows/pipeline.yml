@@ -43,7 +43,10 @@ jobs:
           checkstring: ok
           rollbackonhealthcheckfailed: true
       - name: deployment notification to discord
-        if: success()
+        if: |
+          github.event_name == 'push' &&
+          !contains(join(github.event.commits.*.message), '#skip') &&
+          success()
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: info
