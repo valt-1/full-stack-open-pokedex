@@ -36,7 +36,7 @@ jobs:
           !contains(join(github.event.commits.*.message), '#skip')
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: calm-plateau-92786
           heroku_email: emma.valtonen@helsinki.fi
           healthcheck: https://calm-plateau-92786.herokuapp.com/health
@@ -47,7 +47,7 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: info
-          description: 'Deployed to https://calm-plateau-92786.herokuapp.com/'
+          details: 'to https://calm-plateau-92786.herokuapp.com/ by ${{ toJson(github.event.head_commit.author.username) }}'
           text: A new version of Pokedex deployed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: build failure notification to discord
@@ -70,5 +70,5 @@ jobs:
       - name: bump version and push tag
         uses: anothrNick/github-tag-action@1.36.0
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
