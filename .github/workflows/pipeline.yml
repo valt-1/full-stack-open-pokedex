@@ -42,6 +42,21 @@ jobs:
           healthcheck: https://calm-plateau-92786.herokuapp.com/health
           checkstring: ok
           rollbackonhealthcheckfailed: true
+      - name: deployment notification to discord
+        if: success()
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          description: 'Deployed to https://calm-plateau-92786.herokuapp.com/'
+          text: A new version of Pokedex deployed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: build failure notification to discord
+        if: failure()
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: error
+          text: Build failed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     if: |
       github.event_name == 'push' &&
